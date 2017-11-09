@@ -1,13 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
+import { createLogger } from 'redux-logger';
+import promise from './middlewares/promise';
 import rootReducer from './rootReducer';
 
 const configureStore = (history, preloadedState) => {
-  const middleware = routerMiddleware(history);
+  const router = routerMiddleware(history);
+  const logger = createLogger({ collapsed: true });
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(middleware)
+    applyMiddleware(router, promise, logger)
   );
 
   return store;
