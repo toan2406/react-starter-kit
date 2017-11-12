@@ -1,7 +1,23 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import RepoList from '../repo/RepoList';
-import RepoDetails from '../repo/RepoDetails';
+import Bundle from '../../components/Bundle';
+
+const loadRepoList = () =>
+  import(/* webpackChunkName: "RepoList" */ '../repo/RepoList');
+const loadRepoDetails = () =>
+  import(/* webpackChunkName: "RepoDetails" */ '../repo/RepoDetails');
+
+const RepoList = props => (
+  <Bundle load={loadRepoList}>
+    {RepoList => <RepoList {...props} />}
+  </Bundle>
+);
+
+const RepoDetails = props => (
+  <Bundle load={loadRepoDetails}>
+    {RepoDetails => <RepoDetails {...props} />}
+  </Bundle>
+);
 
 const App = () => (
   <div>
