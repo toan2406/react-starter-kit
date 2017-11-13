@@ -1,18 +1,19 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory'
-import App from './modules/app/App';
+import { renderRoutes } from 'react-router-config';
+import createHistory from 'history/createBrowserHistory';
 import configureStore from './configureStore';
+import routes from './routes';
 
 const history = createHistory();
-const store = configureStore();
+const store = configureStore(history, window.__INITIAL_STATE__);
 
-render(
+hydrate(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      {renderRoutes(routes)}
     </ConnectedRouter>
   </Provider>,
   document.getElementById('react-root')

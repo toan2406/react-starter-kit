@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import lifecycle from 'recompose/lifecycle';
+import setStatic from 'recompose/setStatic';
+import setDisplayName from 'recompose/setDisplayName';
 import { searchRepos } from './actions';
 import { getRepos } from './selectors';
 
@@ -21,11 +23,13 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
+  setDisplayName('RepoList'),
+  setStatic('needs', [searchRepos]),
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
       const { searchRepos } = this.props;
-      searchRepos({});
+      // searchRepos({});
     }
   })
 );

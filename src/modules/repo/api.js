@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 import { normalize } from 'normalizr';
 import { repo as repoSchema } from './schemas';
 

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 220:
+/***/ 231:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,19 +14,27 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(95);
+var _reactRedux = __webpack_require__(98);
 
-var _compose = __webpack_require__(222);
+var _compose = __webpack_require__(235);
 
 var _compose2 = _interopRequireDefault(_compose);
 
-var _lifecycle = __webpack_require__(223);
+var _lifecycle = __webpack_require__(236);
 
 var _lifecycle2 = _interopRequireDefault(_lifecycle);
 
-var _actions = __webpack_require__(96);
+var _setStatic = __webpack_require__(234);
 
-var _selectors = __webpack_require__(228);
+var _setStatic2 = _interopRequireDefault(_setStatic);
+
+var _setDisplayName = __webpack_require__(233);
+
+var _setDisplayName2 = _interopRequireDefault(_setDisplayName);
+
+var _actions = __webpack_require__(99);
+
+var _selectors = __webpack_require__(239);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67,11 +75,10 @@ var mapDispatchToProps = {
   searchRepos: _actions.searchRepos
 };
 
-var enhance = (0, _compose2.default)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps), (0, _lifecycle2.default)({
+var enhance = (0, _compose2.default)((0, _setDisplayName2.default)('RepoList'), (0, _setStatic2.default)('needs', [_actions.searchRepos]), (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps), (0, _lifecycle2.default)({
   componentDidMount: function componentDidMount() {
     var searchRepos = this.props.searchRepos;
-
-    searchRepos({});
+    // searchRepos({});
   }
 }));
 
@@ -79,7 +86,49 @@ exports.default = enhance(RepoList);
 
 /***/ }),
 
-/***/ 222:
+/***/ 233:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _setStatic = __webpack_require__(234);
+
+var _setStatic2 = _interopRequireDefault(_setStatic);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var setDisplayName = function setDisplayName(displayName) {
+  return (0, _setStatic2.default)('displayName', displayName);
+};
+
+exports.default = setDisplayName;
+
+/***/ }),
+
+/***/ 234:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+var setStatic = function setStatic(key, value) {
+  return function (BaseComponent) {
+    /* eslint-disable no-param-reassign */
+    BaseComponent[key] = value;
+    /* eslint-enable no-param-reassign */
+    return BaseComponent;
+  };
+};
+
+exports.default = setStatic;
+
+/***/ }),
+
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -111,7 +160,7 @@ function compose() {
 
 /***/ }),
 
-/***/ 223:
+/***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -123,11 +172,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _react = __webpack_require__(0);
 
-var _setDisplayName = __webpack_require__(224);
+var _setDisplayName = __webpack_require__(233);
 
 var _setDisplayName2 = _interopRequireDefault(_setDisplayName);
 
-var _wrapDisplayName = __webpack_require__(226);
+var _wrapDisplayName = __webpack_require__(237);
 
 var _wrapDisplayName2 = _interopRequireDefault(_wrapDisplayName);
 
@@ -180,7 +229,7 @@ exports.default = lifecycle;
 
 /***/ }),
 
-/***/ 224:
+/***/ 237:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -188,49 +237,7 @@ exports.default = lifecycle;
 
 exports.__esModule = true;
 
-var _setStatic = __webpack_require__(225);
-
-var _setStatic2 = _interopRequireDefault(_setStatic);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var setDisplayName = function setDisplayName(displayName) {
-  return (0, _setStatic2.default)('displayName', displayName);
-};
-
-exports.default = setDisplayName;
-
-/***/ }),
-
-/***/ 225:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-var setStatic = function setStatic(key, value) {
-  return function (BaseComponent) {
-    /* eslint-disable no-param-reassign */
-    BaseComponent[key] = value;
-    /* eslint-enable no-param-reassign */
-    return BaseComponent;
-  };
-};
-
-exports.default = setStatic;
-
-/***/ }),
-
-/***/ 226:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _getDisplayName = __webpack_require__(227);
+var _getDisplayName = __webpack_require__(238);
 
 var _getDisplayName2 = _interopRequireDefault(_getDisplayName);
 
@@ -244,7 +251,7 @@ exports.default = wrapDisplayName;
 
 /***/ }),
 
-/***/ 227:
+/***/ 238:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -267,7 +274,7 @@ exports.default = getDisplayName;
 
 /***/ }),
 
-/***/ 228:
+/***/ 239:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -278,11 +285,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getRepos = undefined;
 
-var _reselect = __webpack_require__(229);
+var _reselect = __webpack_require__(240);
 
-var _normalizr = __webpack_require__(43);
+var _normalizr = __webpack_require__(44);
 
-var _schemas = __webpack_require__(97);
+var _schemas = __webpack_require__(100);
 
 var getRepoEntities = function getRepoEntities(state) {
   return state.repo.repoEntities;
@@ -305,7 +312,7 @@ exports.getRepos = getRepos;
 
 /***/ }),
 
-/***/ 229:
+/***/ 240:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

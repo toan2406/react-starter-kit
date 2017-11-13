@@ -16,18 +16,21 @@
     "express": "^4.16.2",
     "flux-standard-action": "^2.0.0",
     "history": "^4.7.2",
+    "isomorphic-fetch": "^2.2.1",
     "normalizr": "^3.2.4",
     "pug": "^2.0.0-rc.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
+    "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-logger": "^3.0.6",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "serve-favicon": "^2.4.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

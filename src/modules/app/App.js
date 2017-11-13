@@ -1,25 +1,8 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import Bundle from '../../components/Bundle';
+import { Link } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 
-const loadRepoList = () =>
-  import(/* webpackChunkName: "RepoList" */ '../repo/RepoList');
-const loadRepoDetails = () =>
-  import(/* webpackChunkName: "RepoDetails" */ '../repo/RepoDetails');
-
-const RepoList = props => (
-  <Bundle load={loadRepoList}>
-    {RepoList => <RepoList {...props} />}
-  </Bundle>
-);
-
-const RepoDetails = props => (
-  <Bundle load={loadRepoDetails}>
-    {RepoDetails => <RepoDetails {...props} />}
-  </Bundle>
-);
-
-const App = () => (
+const App = ({ route }) => (
   <div>
     <h1>Welcome to React!</h1>
 
@@ -32,8 +15,7 @@ const App = () => (
       </li>
     </ul>
 
-    <Route exact path="/" component={RepoList} />
-    <Route path="/repos" component={RepoDetails} />
+    {renderRoutes(route.routes)}
   </div>
 );
 

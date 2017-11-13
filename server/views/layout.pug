@@ -2,6 +2,8 @@ doctype html
 html
   head
     title= title
+    script.
+      window.__INITIAL_STATE__ = !{state}
   body
     block content
     script(src='/app.bundle.js')
