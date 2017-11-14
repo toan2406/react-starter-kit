@@ -1,6 +1,6 @@
 webpackJsonp([1],{
 
-/***/ 232:
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14,17 +14,374 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = __webpack_require__(45);
+
+var _compose = __webpack_require__(104);
+
+var _compose2 = _interopRequireDefault(_compose);
+
+var _lifecycle = __webpack_require__(105);
+
+var _lifecycle2 = _interopRequireDefault(_lifecycle);
+
+var _setStatic = __webpack_require__(106);
+
+var _setStatic2 = _interopRequireDefault(_setStatic);
+
+var _setDisplayName = __webpack_require__(101);
+
+var _setDisplayName2 = _interopRequireDefault(_setDisplayName);
+
+var _branch = __webpack_require__(248);
+
+var _branch2 = _interopRequireDefault(_branch);
+
+var _renderNothing = __webpack_require__(249);
+
+var _renderNothing2 = _interopRequireDefault(_renderNothing);
+
+var _actions = __webpack_require__(102);
+
+var _selectors = __webpack_require__(243);
+
+var _selectors2 = __webpack_require__(245);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var RepoDetails = function RepoDetails() {
+var RepoDetails = function RepoDetails(_ref) {
+  var selectedRepo = _ref.selectedRepo;
   return _react2.default.createElement(
-    'h2',
+    'div',
     null,
-    'This is repo details page'
+    _react2.default.createElement(
+      'h2',
+      null,
+      selectedRepo.name
+    ),
+    _react2.default.createElement(
+      'p',
+      null,
+      'Star: ',
+      selectedRepo.stargazers_count
+    )
   );
 };
 
-exports.default = RepoDetails;
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    selectedRepo: (0, _selectors.getSelectedRepo)(state),
+    firstRender: (0, _selectors2.getFirstRender)(state)
+  };
+};
+
+var mapDispatchToProps = {
+  getRepo: _actions.getRepo
+};
+
+var enhance = (0, _compose2.default)((0, _setDisplayName2.default)('RepoDetails'), (0, _setStatic2.default)('needs', [_actions.getRepo]), (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps), (0, _lifecycle2.default)({
+  componentDidMount: function componentDidMount() {
+    var _props = this.props,
+        firstRender = _props.firstRender,
+        getRepo = _props.getRepo,
+        match = _props.match;
+
+    if (!firstRender) {
+      getRepo(match.params);
+    }
+  }
+}), (0, _branch2.default)(function (props) {
+  return !props.selectedRepo;
+}, _renderNothing2.default));
+
+exports.default = enhance(RepoDetails);
+
+/***/ }),
+
+/***/ 243:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getSelectedRepo = exports.getRepos = undefined;
+
+var _reselect = __webpack_require__(244);
+
+var _normalizr = __webpack_require__(46);
+
+var _schemas = __webpack_require__(103);
+
+var getRepoEntities = function getRepoEntities(state) {
+  return state.repo.repoEntities;
+};
+var getOwnerEntities = function getOwnerEntities(state) {
+  return state.repo.ownerEntities;
+};
+var getRepoIds = function getRepoIds(state) {
+  return state.repo.repoIds;
+};
+var getSelectedRepoId = function getSelectedRepoId(state) {
+  return state.repo.selectedRepo;
+};
+
+var getRepos = (0, _reselect.createSelector)([getRepoEntities, getOwnerEntities, getRepoIds], function (repoEntities, ownerEntities, repoIds) {
+  return (0, _normalizr.denormalize)(repoIds, [_schemas.repo], {
+    owners: ownerEntities,
+    repos: repoEntities
+  });
+});
+
+var getSelectedRepo = (0, _reselect.createSelector)([getRepoEntities, getOwnerEntities, getSelectedRepoId], function (repoEntities, ownerEntities, selectedRepoId) {
+  return (0, _normalizr.denormalize)(selectedRepoId, _schemas.repo, {
+    owners: ownerEntities,
+    repos: repoEntities
+  });
+});
+
+exports.getRepos = getRepos;
+exports.getSelectedRepo = getSelectedRepo;
+
+/***/ }),
+
+/***/ 244:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+exports.defaultMemoize = defaultMemoize;
+exports.createSelectorCreator = createSelectorCreator;
+exports.createStructuredSelector = createStructuredSelector;
+function defaultEqualityCheck(a, b) {
+  return a === b;
+}
+
+function areArgumentsShallowlyEqual(equalityCheck, prev, next) {
+  if (prev === null || next === null || prev.length !== next.length) {
+    return false;
+  }
+
+  // Do this in a for loop (and not a `forEach` or an `every`) so we can determine equality as fast as possible.
+  var length = prev.length;
+  for (var i = 0; i < length; i++) {
+    if (!equalityCheck(prev[i], next[i])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function defaultMemoize(func) {
+  var equalityCheck = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defaultEqualityCheck;
+
+  var lastArgs = null;
+  var lastResult = null;
+  // we reference arguments instead of spreading them for performance reasons
+  return function () {
+    if (!areArgumentsShallowlyEqual(equalityCheck, lastArgs, arguments)) {
+      // apply arguments instead of spreading for performance.
+      lastResult = func.apply(null, arguments);
+    }
+
+    lastArgs = arguments;
+    return lastResult;
+  };
+}
+
+function getDependencies(funcs) {
+  var dependencies = Array.isArray(funcs[0]) ? funcs[0] : funcs;
+
+  if (!dependencies.every(function (dep) {
+    return typeof dep === 'function';
+  })) {
+    var dependencyTypes = dependencies.map(function (dep) {
+      return typeof dep;
+    }).join(', ');
+    throw new Error('Selector creators expect all input-selectors to be functions, ' + ('instead received the following types: [' + dependencyTypes + ']'));
+  }
+
+  return dependencies;
+}
+
+function createSelectorCreator(memoize) {
+  for (var _len = arguments.length, memoizeOptions = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    memoizeOptions[_key - 1] = arguments[_key];
+  }
+
+  return function () {
+    for (var _len2 = arguments.length, funcs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      funcs[_key2] = arguments[_key2];
+    }
+
+    var recomputations = 0;
+    var resultFunc = funcs.pop();
+    var dependencies = getDependencies(funcs);
+
+    var memoizedResultFunc = memoize.apply(undefined, [function () {
+      recomputations++;
+      // apply arguments instead of spreading for performance.
+      return resultFunc.apply(null, arguments);
+    }].concat(memoizeOptions));
+
+    // If a selector is called with the exact same arguments we don't need to traverse our dependencies again.
+    var selector = defaultMemoize(function () {
+      var params = [];
+      var length = dependencies.length;
+
+      for (var i = 0; i < length; i++) {
+        // apply arguments instead of spreading and mutate a local list of params for performance.
+        params.push(dependencies[i].apply(null, arguments));
+      }
+
+      // apply arguments instead of spreading for performance.
+      return memoizedResultFunc.apply(null, params);
+    });
+
+    selector.resultFunc = resultFunc;
+    selector.recomputations = function () {
+      return recomputations;
+    };
+    selector.resetRecomputations = function () {
+      return recomputations = 0;
+    };
+    return selector;
+  };
+}
+
+var createSelector = exports.createSelector = createSelectorCreator(defaultMemoize);
+
+function createStructuredSelector(selectors) {
+  var selectorCreator = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : createSelector;
+
+  if (typeof selectors !== 'object') {
+    throw new Error('createStructuredSelector expects first argument to be an object ' + ('where each property is a selector, instead received a ' + typeof selectors));
+  }
+  var objectKeys = Object.keys(selectors);
+  return selectorCreator(objectKeys.map(function (key) {
+    return selectors[key];
+  }), function () {
+    for (var _len3 = arguments.length, values = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+      values[_key3] = arguments[_key3];
+    }
+
+    return values.reduce(function (composition, value, index) {
+      composition[objectKeys[index]] = value;
+      return composition;
+    }, {});
+  });
+}
+
+/***/ }),
+
+/***/ 245:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var getFirstRender = function getFirstRender(state) {
+  return state.app.firstRender;
+};
+
+exports.getFirstRender = getFirstRender;
+
+/***/ }),
+
+/***/ 248:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+exports.__esModule = true;
+
+var _react = __webpack_require__(0);
+
+var _setDisplayName = __webpack_require__(101);
+
+var _setDisplayName2 = _interopRequireDefault(_setDisplayName);
+
+var _wrapDisplayName = __webpack_require__(107);
+
+var _wrapDisplayName2 = _interopRequireDefault(_wrapDisplayName);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var identity = function identity(Component) {
+  return Component;
+};
+
+var branch = function branch(test, left) {
+  var right = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : identity;
+  return function (BaseComponent) {
+    var leftFactory = void 0;
+    var rightFactory = void 0;
+    var Branch = function Branch(props) {
+      if (test(props)) {
+        leftFactory = leftFactory || (0, _react.createFactory)(left(BaseComponent));
+        return leftFactory(props);
+      }
+      rightFactory = rightFactory || (0, _react.createFactory)(right(BaseComponent));
+      return rightFactory(props);
+    };
+
+    if (process.env.NODE_ENV !== 'production') {
+      return (0, _setDisplayName2.default)((0, _wrapDisplayName2.default)(BaseComponent, 'branch'))(Branch);
+    }
+    return Branch;
+  };
+};
+
+exports.default = branch;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 249:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _react = __webpack_require__(0);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Nothing = function (_Component) {
+  _inherits(Nothing, _Component);
+
+  function Nothing() {
+    _classCallCheck(this, Nothing);
+
+    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+  }
+
+  Nothing.prototype.render = function render() {
+    return null;
+  };
+
+  return Nothing;
+}(_react.Component);
+
+var renderNothing = function renderNothing(_) {
+  return Nothing;
+};
+
+exports.default = renderNothing;
 
 /***/ })
 

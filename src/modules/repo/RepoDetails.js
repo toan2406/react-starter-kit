@@ -1,5 +1,44 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import lifecycle from 'recompose/lifecycle';
+import setStatic from 'recompose/setStatic';
+import setDisplayName from 'recompose/setDisplayName';
+import branch from 'recompose/branch';
+import renderNothing from 'recompose/renderNothing';
+import { getRepo } from './actions';
+import { getSelectedRepo } from './selectors';
+import { getFirstRender } from '../app/selectors';
 
-const RepoDetails = () => <h2>This is repo details page</h2>;
+const RepoDetails = ({ selectedRepo }) => (
+  <div>
+    <h2>{selectedRepo.name}</h2>
+    <p>Star: {selectedRepo.stargazers_count}</p>
+  </div>
+);
 
-export default RepoDetails;
+const mapStateToProps = (state, ownProps) => ({
+  selectedRepo: getSelectedRepo(state),
+  firstRender: getFirstRender(state)
+});
+
+const mapDispatchToProps = {
+  getRepo
+};
+
+const enhance = compose(
+  setDisplayName('RepoDetails'),
+  setStatic('needs', [getRepo]),
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentDidMount() {
+      const { firstRender, getRepo, match } = this.props;
+      if (!firstRender) {
+        getRepo(match.params);
+      }
+    }
+  }),
+  branch(props => !props.selectedRepo, renderNothing)
+);
+
+export default enhance(RepoDetails);

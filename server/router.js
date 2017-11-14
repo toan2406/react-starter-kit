@@ -8,6 +8,7 @@ import createHistory from 'history/createMemoryHistory';
 import configureStore from '../src/configureStore';
 import routes from './routes';
 import fetchComponentData from './helpers/fetchComponentData';
+import extractSplitPoints from './helpers/extractSplitPoints';
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.use((req, res, next) => {
 
   store.dispatch(push(req.originalUrl));
 
-  fetchComponentData(store.dispatch, currentRoute, {})
+  fetchComponentData(store.dispatch, currentRoute)
     .then(data => {
       const html = renderToString(
         <Provider store={store}>
@@ -28,11 +29,13 @@ router.use((req, res, next) => {
         </Provider>
       );
 
+      const splitPoints = extractSplitPoints(currentRoute);
       const initialState = store.getState();
 
       res.render('index', {
         title: 'React Starter Kit',
-        state: JSON.stringify(initialState),
+        initialState: JSON.stringify(initialState),
+        splitPoints: JSON.stringify(splitPoints),
         html
       });
     })

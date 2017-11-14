@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.publicDir = exports.viewDir = undefined;
+exports.faviconPath = exports.publicDir = exports.viewDir = undefined;
 
 var _path = require('path');
 
@@ -14,3 +14,5 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var viewDir = exports.viewDir = _path2.default.join(__dirname, '../build/views');
 
 var publicDir = exports.publicDir = _path2.default.join(__dirname, '../build/public');
+
+var faviconPath = exports.faviconPath = _path2.default.join(__dirname, '../build/public/favicon.ico');

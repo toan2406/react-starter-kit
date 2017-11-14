@@ -6,11 +6,17 @@ import rootReducer from './rootReducer';
 
 const configureStore = (history, preloadedState) => {
   const router = routerMiddleware(history);
-  const logger = createLogger({ collapsed: true });
+  let middlewares = [router, promise];
+
+  if (__CLIENT__ && __DEV__) {
+    const logger = createLogger({ collapsed: true });
+    middlewares.push(logger);
+  }
+
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(router, promise, logger)
+    applyMiddleware(...middlewares)
   );
 
   return store;

@@ -8,6 +8,10 @@ var _App = require('../src/modules/app/App');
 
 var _App2 = _interopRequireDefault(_App);
 
+var _NotFound = require('../src/components/NotFound');
+
+var _NotFound2 = _interopRequireDefault(_NotFound);
+
 var _RepoList = require('../src/modules/repo/RepoList');
 
 var _RepoList2 = _interopRequireDefault(_RepoList);
@@ -27,6 +31,8 @@ var routes = [{
   }, {
     component: _RepoDetails2.default,
     path: '/repos'
+  }, {
+    component: _NotFound2.default
   }]
 }];
 

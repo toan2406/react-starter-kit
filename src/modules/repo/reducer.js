@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   ownerEntities: {},
   repoEntities: {},
   repoIds: [],
+  selectedRepo: null,
   error: null
 };
 
@@ -18,6 +19,7 @@ export default handleActions({
         ownerEntities: {},
         repoEntities: {},
         repoIds: [],
+        selectedRepo: null,
         error: null
       })
       .get(),
@@ -38,6 +40,37 @@ export default handleActions({
         ownerEntities: {},
         repoEntities: {},
         repoIds: [],
+        error: payload
+      })
+      .get(),
+
+  [`${getRepo}_${PENDING}`]: state =>
+    Map(state)
+      .set({
+        ownerEntities: {},
+        repoEntities: {},
+        repoIds: [],
+        selectedRepo: null,
+        error: null
+      })
+      .get(),
+
+  [`${getRepo}_${FULFILLED}`]: (state, { payload: { entities, result } }) =>
+    Map(state)
+      .set({
+        ownerEntities: entities.owners,
+        repoEntities: entities.repos,
+        selectedRepo: result,
+        error: null
+      })
+      .get(),
+
+  [`${getRepo}_${REJECTED}`]: (state, { payload }) =>
+    Map(state)
+      .set({
+        ownerEntities: {},
+        repoEntities: {},
+        selectedRepo: null,
         error: payload
       })
       .get()

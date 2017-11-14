@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import lifecycle from 'recompose/lifecycle';
 import { Link } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { setFirstRender } from './actions';
 
 const App = ({ route }) => (
   <div>
@@ -11,7 +15,7 @@ const App = ({ route }) => (
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/repos">Details</Link>
+        <Link to="/repos">Top Repos</Link>
       </li>
     </ul>
 
@@ -19,4 +23,17 @@ const App = ({ route }) => (
   </div>
 );
 
-export default App;
+const mapDispatchToProps = {
+  setFirstRender
+};
+
+const enhance = compose(
+  connect(null, mapDispatchToProps),
+  lifecycle({
+    componentDidMount() {
+      this.props.setFirstRender(false);
+    }
+  })
+);
+
+export default enhance(App);
