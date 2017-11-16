@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter, push } from 'react-router-redux';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import createHistory from 'history/createMemoryHistory';
-import configureStore from '../src/configureStore';
+import configureStore from '../shared/configureStore';
 import routes from './routes';
 import fetchComponentData from './helpers/fetchComponentData';
 import extractSplitPoints from './helpers/extractSplitPoints';

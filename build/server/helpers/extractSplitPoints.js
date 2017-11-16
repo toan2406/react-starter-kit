@@ -7,6 +7,7 @@ exports.default = extractSplitPoints;
 function extractSplitPoints(routes) {
   return routes.map(function (_ref) {
     var route = _ref.route;
-    return route.component.name || route.component.displayName;
+
+    return route.component.displayName || route.component.name;
   });
 }

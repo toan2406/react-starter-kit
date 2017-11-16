@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import { renderRoutes } from 'react-router-config';
 import createHistory from 'history/createBrowserHistory';
-import configureStore from './configureStore';
+import configureStore from '../shared/configureStore';
 import * as Bundles from './AsyncBundles';
 import routes from './routes';
 

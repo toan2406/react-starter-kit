@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:client": "webpack",
-    "build:server": "babel server --out-dir build --copy-files",
-    "dev": "babel-watch server & webpack --watch",
-    "start": "node build",
+    "dev": "babel-watch src/server & webpack --config webpack.dev.js --watch",
+    "start": "node build/server",
+    "build:client": "webpack --config webpack.prod.js",
+    "build:server": "babel src --out-dir build --ignore client --copy-files",
+    "build": "npm run build:server && npm run build:client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -45,7 +46,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-watch": "^2.0.7",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.4",
+    "webpack-merge": "^4.1.1"
   }
 }

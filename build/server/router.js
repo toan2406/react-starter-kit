@@ -24,7 +24,7 @@ var _createMemoryHistory = require('history/createMemoryHistory');
 
 var _createMemoryHistory2 = _interopRequireDefault(_createMemoryHistory);
 
-var _configureStore = require('../src/configureStore');
+var _configureStore = require('../shared/configureStore');
 
 var _configureStore2 = _interopRequireDefault(_configureStore);
 
@@ -48,11 +48,10 @@ router.use(function (req, res, next) {
   var history = (0, _createMemoryHistory2.default)();
   var store = (0, _configureStore2.default)(history);
   var currentRoute = (0, _reactRouterConfig.matchRoutes)(_routes2.default, req.originalUrl);
-  var splitPoints = (0, _extractSplitPoints2.default)(currentRoute);
 
   store.dispatch((0, _reactRouterRedux.push)(req.originalUrl));
 
-  (0, _fetchComponentData2.default)(store.dispatch, currentRoute, {}).then(function (data) {
+  (0, _fetchComponentData2.default)(store.dispatch, currentRoute).then(function (data) {
     var html = (0, _server.renderToString)(_react2.default.createElement(
       _reactRedux.Provider,
       { store: store },
@@ -63,6 +62,7 @@ router.use(function (req, res, next) {
       )
     ));
 
+    var splitPoints = (0, _extractSplitPoints2.default)(currentRoute);
     var initialState = store.getState();
 
     res.render('index', {

@@ -1,6 +1,8 @@
-import App from './modules/app/App';
-import NotFound from './components/NotFound';
-import { Home, RepoList, RepoDetails } from './AsyncBundles';
+import App from '../shared/modules/app/App';
+import NotFound from '../shared/components/NotFound';
+import Home from '../shared/modules/home/Home';
+import RepoList from '../shared/modules/repo/RepoList';
+import RepoDetails from '../shared/modules/repo/RepoDetails';
 
 const routes = [
   {
