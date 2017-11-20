@@ -26,11 +26,16 @@ var _actions = require('./actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var styles = {
+  'app': 'app__app'
+};
+
+
 var App = function App(_ref) {
   var route = _ref.route;
   return _react2.default.createElement(
     'div',
-    null,
+    { className: styles.app },
     _react2.default.createElement(
       'h1',
       null,
