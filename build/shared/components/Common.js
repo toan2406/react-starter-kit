@@ -8,23 +8,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Common = require('../../components/Common');
-
-var _Common2 = _interopRequireDefault(_Common);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Home = function Home() {
+var Common = function Common() {
   return _react2.default.createElement(
-    'div',
+    'h1',
     null,
-    _react2.default.createElement(
-      'h2',
-      null,
-      'Home Page'
-    ),
-    _react2.default.createElement(_Common2.default, null)
+    'Demo common chunk'
   );
 };
 
-exports.default = Home;
+exports.default = Common;

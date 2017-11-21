@@ -1,4 +1,5 @@
 import express from 'express';
+import expressStaticGzip from 'express-static-gzip';
 import favicon from 'serve-favicon';
 import { viewDir, publicDir, faviconPath } from './config';
 import router from './router';
@@ -10,7 +11,9 @@ app.set('views', viewDir);
 app.set('view engine', 'pug');
 
 app.use(favicon(faviconPath));
-app.use(express.static(publicDir));
+app.use(expressStaticGzip(publicDir));
+// or config in web server
+// app.use(express.static(publicDir));
 app.use('/', router);
 app.use(errorHandler);
 

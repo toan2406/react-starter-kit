@@ -40,6 +40,10 @@ var _selectors = require('./selectors');
 
 var _selectors2 = require('../app/selectors');
 
+var _Common = require('../../components/Common');
+
+var _Common2 = _interopRequireDefault(_Common);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RepoDetails = function RepoDetails(_ref) {
@@ -52,6 +56,7 @@ var RepoDetails = function RepoDetails(_ref) {
       null,
       selectedRepo.name
     ),
+    _react2.default.createElement(_Common2.default, null),
     _react2.default.createElement(
       'p',
       null,

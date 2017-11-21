@@ -9,10 +9,12 @@ import { push } from 'react-router-redux';
 import { searchRepos } from './actions';
 import { getRepos } from './selectors';
 import { getFirstRender } from '../app/selectors';
+import Common from '../../components/Common';
 
 const RepoList = ({ repos, onItemClick }) => (
   <div>
     <h2>Top 10 Repos</h2>
+    <Common />
     <ul>
       {repos.map(({ id, name, owner }) => (
         <li

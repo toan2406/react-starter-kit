@@ -20,22 +20,36 @@ var _lifecycle2 = _interopRequireDefault(_lifecycle);
 
 var _reactRouterDom = require('react-router-dom');
 
-var _reactRouterConfig = require('react-router-config');
+var _reactTransitionGroup = require('react-transition-group');
+
+var _FadeTransition = require('../../components/FadeTransition');
+
+var _FadeTransition2 = _interopRequireDefault(_FadeTransition);
+
+var _renderRoutes = require('../../helpers/renderRoutes');
+
+var _renderRoutes2 = _interopRequireDefault(_renderRoutes);
 
 var _actions = require('./actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
-  'app': 'app__app'
+  'content-wrapper': 'app__content-wrapper',
+  'content': 'app__content',
+  'contentWrapper': 'app__content-wrapper'
 };
 
 
 var App = function App(_ref) {
-  var route = _ref.route;
+  var route = _ref.route,
+      location = _ref.location;
+
+  var currentKey = location.pathname.split('/')[1];
+
   return _react2.default.createElement(
     'div',
-    { className: styles.app },
+    null,
     _react2.default.createElement(
       'h1',
       null,
@@ -63,7 +77,19 @@ var App = function App(_ref) {
         )
       )
     ),
-    (0, _reactRouterConfig.renderRoutes)(route.routes)
+    _react2.default.createElement(
+      _reactTransitionGroup.TransitionGroup,
+      { className: styles.contentWrapper },
+      _react2.default.createElement(
+        _FadeTransition2.default,
+        { key: currentKey },
+        _react2.default.createElement(
+          'main',
+          { className: styles.content },
+          (0, _renderRoutes2.default)(route.routes, location)
+        )
+      )
+    )
   );
 };
 

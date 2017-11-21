@@ -9,10 +9,12 @@ import renderNothing from 'recompose/renderNothing';
 import { getRepo } from './actions';
 import { getSelectedRepo } from './selectors';
 import { getFirstRender } from '../app/selectors';
+import Common from '../../components/Common';
 
 const RepoDetails = ({ selectedRepo }) => (
   <div>
     <h2>{selectedRepo.name}</h2>
+    <Common />
     <p>Star: {selectedRepo.stargazers_count}</p>
   </div>
 );

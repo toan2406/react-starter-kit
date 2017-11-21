@@ -1,7 +1,7 @@
 const merge = require('webpack-merge');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -13,11 +13,12 @@ module.exports = merge(common, {
       __CLIENT__: true,
       __DEV__: false
     }),
-    new ExtractTextPlugin({
-      filename: '[name].css'
-    }),
     new UglifyJSPlugin({
       sourceMap: true
+    }),
+    new CompressionPlugin({
+      deleteOriginalAssets: false,
+      test: /\.js$|\.css$/
     })
   ]
 });

@@ -1,5 +1,7 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -37,5 +39,17 @@ module.exports = {
         })
       }
     ]
-  }
+  },
+  plugins: [
+    new CleanWebpackPlugin(['build/public/*.@(js|css)*']),
+    new CommonsChunkPlugin({
+      names: ['app'],
+      children: true,
+      async: 'commons',
+      minChunks: 2
+    }),
+    new ExtractTextPlugin({
+      filename: '[name].css'
+    })
+  ]
 };

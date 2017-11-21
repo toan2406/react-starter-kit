@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
+    "express-static-gzip": "^0.3.0",
     "flux-standard-action": "^2.0.0",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
@@ -50,6 +51,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-watch": "^2.0.7",
+    "clean-webpack-plugin": "^0.1.17",
+    "compression-webpack-plugin": "^1.0.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
