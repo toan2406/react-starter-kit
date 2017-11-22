@@ -37,11 +37,23 @@ module.exports = {
             'sass-loader'
           ]
         })
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: '/',
+              name: '[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(['build/public/*.@(js|css)*']),
+    new CleanWebpackPlugin(['build/public/*.@(js|css|svg)*']),
     new CommonsChunkPlugin({
       names: ['app'],
       children: true,

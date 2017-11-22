@@ -18,6 +18,14 @@
             "preprocessCss": "./processSass.js",
             "camelCase": true
           }
+        ],
+        [
+          "transform-assets",
+          {
+            "extensions": ["png", "jpg", "gif", "svg"],
+            "publicPath": "/",
+            "name": "[name].[ext]"
+          }
         ]
       ]
     }

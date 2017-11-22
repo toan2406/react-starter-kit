@@ -1,6 +1,6 @@
 module.exports = {
   verbose: true,
-  modulePaths: ['<rootDir>/jest'],
-  setupFiles: ['<rootDir>/jest/shim', '<rootDir>/jest/enzymeSetup'],
-  setupTestFrameworkScriptFile: '<rootDir>/jest/jestSetup'
+  modulePaths: ['<rootDir>/test'],
+  setupFiles: ['<rootDir>/test/shim', '<rootDir>/test/enzymeSetup'],
+  setupTestFrameworkScriptFile: '<rootDir>/test/jestSetup'
 };

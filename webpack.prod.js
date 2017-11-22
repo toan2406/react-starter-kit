@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const ModuleConcatenationPlugin = require('webpack/lib/optimize/ModuleConcatenationPlugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const common = require('./webpack.common.js');
@@ -13,6 +14,7 @@ module.exports = merge(common, {
       __CLIENT__: true,
       __DEV__: false
     }),
+    new ModuleConcatenationPlugin(),
     new UglifyJSPlugin({
       sourceMap: true
     }),

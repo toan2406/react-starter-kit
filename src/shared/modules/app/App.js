@@ -9,13 +9,16 @@ import renderRoutes from '../../helpers/renderRoutes';
 import { setFirstRender } from './actions';
 
 import styles from './app.scss';
+import logo from './logo.svg';
 
 const App = ({ route, location }) => {
   const currentKey = location.pathname.split('/')[1];
 
   return (
     <div>
-      <h1>Welcome to React!</h1>
+      <h1 className={styles.header}>
+        <img src={logo} height="30" /> Welcome to React!
+      </h1>
 
       <ul>
         <li>

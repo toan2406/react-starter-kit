@@ -32,9 +32,14 @@ var _renderRoutes2 = _interopRequireDefault(_renderRoutes);
 
 var _actions = require('./actions');
 
+var _logo = '/logo.svg';
+
+var _logo2 = _interopRequireDefault(_logo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var styles = {
+  'header': 'app__header',
   'content-wrapper': 'app__content-wrapper',
   'content': 'app__content',
   'contentWrapper': 'app__content-wrapper'
@@ -52,8 +57,9 @@ var App = function App(_ref) {
     null,
     _react2.default.createElement(
       'h1',
-      null,
-      'Welcome to React!'
+      { className: styles.header },
+      _react2.default.createElement('img', { src: _logo2.default, height: '30' }),
+      ' Welcome to React!'
     ),
     _react2.default.createElement(
       'ul',
