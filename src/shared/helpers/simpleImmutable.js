@@ -1,15 +1,18 @@
+// @flow
 class _Functor {
-  constructor(value) {
+  value: Object;
+
+  constructor(value: Object) {
     this.value = value;
   }
 
-  get() {
+  get(): Object {
     return this.value;
   }
 }
 
 class _Map extends _Functor {
-  set(...args) {
+  set(...args: [Object, void] | [string, mixed]): _Map {
     if (typeof args[0] === 'object' && args[0] !== null) {
       const newValue = {
         ...this.value,
@@ -30,6 +33,6 @@ class _Map extends _Functor {
   }
 }
 
-export function Map(value) {
+export function Map(value: Object): _Map {
   return new _Map(value);
 }

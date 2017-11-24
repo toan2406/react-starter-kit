@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -11,13 +12,22 @@ import { getSelectedRepo } from './selectors';
 import { getFirstRender } from '../app/selectors';
 import Common from '../../components/Common';
 
-const RepoDetails = ({ selectedRepo }) => (
-  <div>
-    <h2>{selectedRepo.name}</h2>
-    <Common />
-    <p>Star: {selectedRepo.stargazers_count}</p>
-  </div>
-);
+type Repo = {
+  name: string,
+  stargazers_count: number
+};
+type Props = {|
+  selectedRepo?: Repo
+|};
+
+const RepoDetails = ({ selectedRepo }: Props) =>
+  !selectedRepo ? null : (
+    <div>
+      <h2>{selectedRepo.name}</h2>
+      <Common />
+      <p>Star: {selectedRepo.stargazers_count}</p>
+    </div>
+  );
 
 const mapStateToProps = (state, ownProps) => ({
   selectedRepo: getSelectedRepo(state),

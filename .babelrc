@@ -1,5 +1,5 @@
 {
-  "presets": ["env", "react"],
+  "presets": ["env", "react", "flow"],
   "plugins": [
     "transform-es2015-destructuring",
     "transform-es2015-spread",

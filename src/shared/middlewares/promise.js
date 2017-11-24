@@ -1,5 +1,12 @@
+// @flow
 import { isFSA } from 'flux-standard-action';
 import isPromise from '../helpers/isPromise';
+
+type Action = Object;
+type Store = {
+  getState: () => Object,
+  dispatch: Action => mixed
+};
 
 export const types = {
   PENDING: 'PENDING',
@@ -7,8 +14,8 @@ export const types = {
   REJECTED: 'REJECTED'
 };
 
-export default function promiseMiddleware({ dispatch }) {
-  return next => action => {
+export default function promiseMiddleware(store: Store) {
+  return (next: Action => mixed) => (action: Action) => {
     const { type, payload } = action;
 
     if (!isFSA(action) || !isPromise(payload)) {
@@ -18,7 +25,7 @@ export default function promiseMiddleware({ dispatch }) {
     const { PENDING, FULFILLED, REJECTED } = types;
 
     const handleFulfill = result => {
-      dispatch({
+      store.dispatch({
         ...action,
         type: `${type}_${FULFILLED}`,
         payload: result
@@ -27,7 +34,7 @@ export default function promiseMiddleware({ dispatch }) {
     };
 
     const handleReject = error => {
-      dispatch({
+      store.dispatch({
         ...action,
         type: `${type}_${REJECTED}`,
         payload: error,

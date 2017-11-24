@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
@@ -11,7 +12,17 @@ import { getRepos } from './selectors';
 import { getFirstRender } from '../app/selectors';
 import Common from '../../components/Common';
 
-const RepoList = ({ repos, onItemClick }) => (
+type Repo = {
+  id: string,
+  name: string,
+  owner: { login: string }
+};
+type Props = {|
+  repos: Array<Repo>,
+  onItemClick: ({ owner: string, repo: string }) => mixed
+|};
+
+const RepoList = ({ repos, onItemClick }: Props) => (
   <div>
     <h2>Top 10 Repos</h2>
     <Common />
