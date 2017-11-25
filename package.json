@@ -7,11 +7,10 @@
   "scripts": {
     "dev": "BABEL_ENV=server babel-watch src/server & webpack --config webpack.dev.js --watch",
     "build:client": "webpack --config webpack.prod.js",
-    "build:server": "BABEL_ENV=server babel src --out-dir build --ignore client --copy-files",
+    "build:server": "BABEL_ENV=server babel src --out-dir build --ignore client,**/*.test.js --copy-files",
     "build": "npm run build:server && npm run build:client",
     "start": "node build/server",
-    "test": "jest",
-    "flow": "flow"
+    "test": "flow && jest"
   },
   "author": "",
   "license": "ISC",

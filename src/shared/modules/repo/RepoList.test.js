@@ -18,7 +18,7 @@ const initialState = {
 
 const populatedState = {
   app: {
-    firstRender: false
+    firstRender: true
   },
   repo: {
     ownerEntities: {

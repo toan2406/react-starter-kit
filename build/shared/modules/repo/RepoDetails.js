@@ -48,7 +48,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var RepoDetails = function RepoDetails(_ref) {
   var selectedRepo = _ref.selectedRepo;
-  return _react2.default.createElement(
+  return !selectedRepo ? null : _react2.default.createElement(
     'div',
     null,
     _react2.default.createElement(

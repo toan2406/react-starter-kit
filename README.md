@@ -14,4 +14,5 @@ React Starter Kit is a boilerplate for web development, built on top of Express,
 - [x] Code splitting
 - [x] Server side rendering
 - [x] CSS modules
+- [x] Flow type checker
 - [ ] Service worker

@@ -23,9 +23,7 @@ var types = exports.types = {
   REJECTED: 'REJECTED'
 };
 
-function promiseMiddleware(_ref) {
-  var dispatch = _ref.dispatch;
-
+function promiseMiddleware(store) {
   return function (next) {
     return function (action) {
       var type = action.type,
@@ -42,7 +40,7 @@ function promiseMiddleware(_ref) {
 
 
       var handleFulfill = function handleFulfill(result) {
-        dispatch(_extends({}, action, {
+        store.dispatch(_extends({}, action, {
           type: type + '_' + FULFILLED,
           payload: result
         }));
@@ -50,7 +48,7 @@ function promiseMiddleware(_ref) {
       };
 
       var handleReject = function handleReject(error) {
-        dispatch(_extends({}, action, {
+        store.dispatch(_extends({}, action, {
           type: type + '_' + REJECTED,
           payload: error,
           error: true
