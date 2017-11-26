@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getRepo = exports.searchRepos = undefined;
+exports.enterSearchKeyword = exports.getRepo = exports.searchRepos = undefined;
 
 var _reduxActions = require('redux-actions');
 
@@ -15,10 +15,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 var _createActions = (0, _reduxActions.createActions)({
   SEARCH_REPOS: repoApi.searchRepos,
-  GET_REPO: repoApi.getRepo
+  GET_REPO: repoApi.getRepo,
+  ENTER_SEARCH_KEYWORD: function ENTER_SEARCH_KEYWORD(keyword) {
+    return { keyword: keyword };
+  }
 }),
     searchRepos = _createActions.searchRepos,
-    getRepo = _createActions.getRepo;
+    getRepo = _createActions.getRepo,
+    enterSearchKeyword = _createActions.enterSearchKeyword;
 
 exports.searchRepos = searchRepos;
 exports.getRepo = getRepo;
+exports.enterSearchKeyword = enterSearchKeyword;

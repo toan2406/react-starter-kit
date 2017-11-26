@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getSelectedRepo = exports.getRepos = undefined;
+exports.getSearchKeyword = exports.getSelectedRepo = exports.getRepos = undefined;
 
 var _reselect = require('reselect');
 
@@ -23,6 +23,9 @@ var getRepoIds = function getRepoIds(state) {
 var getSelectedRepoId = function getSelectedRepoId(state) {
   return state.repo.selectedRepo;
 };
+var getSearchKeyword = function getSearchKeyword(state) {
+  return state.repo.searchKeyword;
+};
 
 var getRepos = (0, _reselect.createSelector)([getRepoEntities, getOwnerEntities, getRepoIds], function (repoEntities, ownerEntities, repoIds) {
   return (0, _normalizr.denormalize)(repoIds, [_schemas.repo], {
@@ -40,3 +43,4 @@ var getSelectedRepo = (0, _reselect.createSelector)([getRepoEntities, getOwnerEn
 
 exports.getRepos = getRepos;
 exports.getSelectedRepo = getSelectedRepo;
+exports.getSearchKeyword = getSearchKeyword;

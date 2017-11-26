@@ -38,10 +38,6 @@ var _selectors = require('./selectors');
 
 var _selectors2 = require('../app/selectors');
 
-var _Common = require('../../components/Common');
-
-var _Common2 = _interopRequireDefault(_Common);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var RepoList = function RepoList(_ref) {
@@ -55,7 +51,6 @@ var RepoList = function RepoList(_ref) {
       null,
       'Top 10 Repos'
     ),
-    _react2.default.createElement(_Common2.default, null),
     _react2.default.createElement(
       'ul',
       null,
@@ -79,9 +74,11 @@ var RepoList = function RepoList(_ref) {
   );
 };
 
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     repos: (0, _selectors.getRepos)(state),
+    keyword: (0, _selectors.getSearchKeyword)(state),
     firstRender: (0, _selectors2.getFirstRender)(state)
   };
 };
@@ -103,10 +100,11 @@ var enhance = (0, _compose2.default)((0, _setDisplayName2.default)('RepoList'), 
   componentDidMount: function componentDidMount() {
     var _props = this.props,
         firstRender = _props.firstRender,
-        searchRepos = _props.searchRepos;
+        searchRepos = _props.searchRepos,
+        keyword = _props.keyword;
 
     if (!firstRender) {
-      searchRepos({});
+      searchRepos({ keyword: keyword });
     }
   }
 }));

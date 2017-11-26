@@ -1,6 +1,6 @@
 import App from '../shared/modules/app/App';
 import NotFound from '../shared/components/NotFound';
-import { Home, RepoList, RepoDetails } from './AsyncBundles';
+import { Home, RepoDetails } from './AsyncBundles';
 
 const routes = [
   {
@@ -10,10 +10,6 @@ const routes = [
         path: '/',
         exact: true,
         component: Home
-      },
-      {
-        path: '/repos',
-        component: RepoList
       },
       {
         path: '/:owner/:repo',

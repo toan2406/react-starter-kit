@@ -16,10 +16,6 @@ var _Home = require('../shared/modules/home/Home');
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _RepoList = require('../shared/modules/repo/RepoList');
-
-var _RepoList2 = _interopRequireDefault(_RepoList);
-
 var _RepoDetails = require('../shared/modules/repo/RepoDetails');
 
 var _RepoDetails2 = _interopRequireDefault(_RepoDetails);
@@ -32,9 +28,6 @@ var routes = [{
     path: '/',
     exact: true,
     component: _Home2.default
-  }, {
-    path: '/repos',
-    component: _RepoList2.default
   }, {
     path: '/:owner/:repo',
     component: _RepoDetails2.default

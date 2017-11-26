@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { searchRepos, getRepo } from './actions';
+import { searchRepos, getRepo, enterSearchKeyword } from './actions';
 import { types } from '../../middlewares/promise';
 import { Map } from '../../helpers/simpleImmutable';
 
@@ -9,7 +9,8 @@ const INITIAL_STATE = {
   repoEntities: {},
   repoIds: [],
   selectedRepo: null,
-  error: null
+  error: null,
+  searchKeyword: ''
 };
 
 export default handleActions({
@@ -72,6 +73,13 @@ export default handleActions({
         repoEntities: {},
         selectedRepo: null,
         error: payload
+      })
+      .get(),
+
+  [enterSearchKeyword]: (state, { payload }) =>
+    Map(state)
+      .set({
+        searchKeyword: payload.keyword
       })
       .get()
 }, INITIAL_STATE);

@@ -24,9 +24,6 @@ const App = ({ route, location }) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/repos">Top Repos</Link>
-        </li>
       </ul>
 
       <TransitionGroup className={styles.contentWrapper}>

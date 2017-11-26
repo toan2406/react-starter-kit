@@ -72,15 +72,6 @@ var App = function App(_ref) {
           { to: '/' },
           'Home'
         )
-      ),
-      _react2.default.createElement(
-        'li',
-        null,
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/repos' },
-          'Top Repos'
-        )
       )
     ),
     _react2.default.createElement(

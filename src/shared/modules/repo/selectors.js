@@ -6,6 +6,7 @@ const getRepoEntities = state => state.repo.repoEntities;
 const getOwnerEntities = state => state.repo.ownerEntities;
 const getRepoIds = state => state.repo.repoIds;
 const getSelectedRepoId = state => state.repo.selectedRepo;
+const getSearchKeyword = state => state.repo.searchKeyword;
 
 const getRepos = createSelector(
   [getRepoEntities, getOwnerEntities, getRepoIds],
@@ -25,4 +26,4 @@ const getSelectedRepo = createSelector(
     })
 );
 
-export { getRepos, getSelectedRepo };
+export { getRepos, getSelectedRepo, getSearchKeyword };

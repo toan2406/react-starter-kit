@@ -25,7 +25,8 @@ var INITIAL_STATE = {
   repoEntities: {},
   repoIds: [],
   selectedRepo: null,
-  error: null
+  error: null,
+  searchKeyword: ''
 };
 
 exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _defineProperty(_handleActions, _actions.searchRepos + '_' + PENDING, function undefined(state) {
@@ -79,5 +80,10 @@ exports.default = (0, _reduxActions.handleActions)((_handleActions = {}, _define
     repoEntities: {},
     selectedRepo: null,
     error: payload
+  }).get();
+}), _defineProperty(_handleActions, _actions.enterSearchKeyword, function (state, _ref5) {
+  var payload = _ref5.payload;
+  return (0, _simpleImmutable.Map)(state).set({
+    searchKeyword: payload.keyword
   }).get();
 }), _handleActions), INITIAL_STATE);

@@ -5,6 +5,7 @@
     "transform-es2015-spread",
     "transform-object-rest-spread",
     "transform-class-properties",
+    "transform-function-bind",
     "dynamic-import-webpack"
   ],
   "env": {

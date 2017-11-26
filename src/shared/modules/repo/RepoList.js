@@ -8,9 +8,8 @@ import setStatic from 'recompose/setStatic';
 import setDisplayName from 'recompose/setDisplayName';
 import { push } from 'react-router-redux';
 import { searchRepos } from './actions';
-import { getRepos } from './selectors';
+import { getRepos, getSearchKeyword } from './selectors';
 import { getFirstRender } from '../app/selectors';
-import Common from '../../components/Common';
 
 type Repo = {
   id: string,
@@ -25,7 +24,6 @@ type Props = {|
 const RepoList = ({ repos, onItemClick }: Props) => (
   <div>
     <h2>Top 10 Repos</h2>
-    <Common />
     <ul>
       {repos.map(({ id, name, owner }) => (
         <li
@@ -44,6 +42,7 @@ const RepoList = ({ repos, onItemClick }: Props) => (
 
 const mapStateToProps = (state, ownProps) => ({
   repos: getRepos(state),
+  keyword: getSearchKeyword(state),
   firstRender: getFirstRender(state)
 });
 
@@ -61,9 +60,9 @@ const enhance = compose(
   }),
   lifecycle({
     componentDidMount() {
-      const { firstRender, searchRepos } = this.props;
+      const { firstRender, searchRepos, keyword } = this.props;
       if (!firstRender) {
-        searchRepos({});
+        searchRepos({ keyword });
       }
     }
   })
