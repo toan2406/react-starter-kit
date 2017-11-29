@@ -9,7 +9,6 @@ import setDisplayName from 'recompose/setDisplayName';
 import { push } from 'react-router-redux';
 import { searchRepos } from './actions';
 import { getRepos, getSearchKeyword } from './selectors';
-import { getFirstRender } from '../app/selectors';
 
 type Repo = {
   id: string,
@@ -42,8 +41,7 @@ const RepoList = ({ repos, onItemClick }: Props) => (
 
 const mapStateToProps = (state, ownProps) => ({
   repos: getRepos(state),
-  keyword: getSearchKeyword(state),
-  firstRender: getFirstRender(state)
+  keyword: getSearchKeyword(state)
 });
 
 const mapDispatchToProps = {
@@ -60,10 +58,8 @@ const enhance = compose(
   }),
   lifecycle({
     componentDidMount() {
-      const { firstRender, searchRepos, keyword } = this.props;
-      if (!firstRender) {
-        searchRepos({ keyword });
-      }
+      const { searchRepos, keyword } = this.props;
+      searchRepos({ keyword });
     }
   })
 );

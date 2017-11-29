@@ -18,7 +18,7 @@ const initialState = {
 
 const populatedState = {
   app: {
-    firstRender: true
+    firstRender: false
   },
   repo: {
     ownerEntities: {
@@ -38,14 +38,6 @@ const populatedState = {
 describe('RepoList component', () => {
   it('has correct display name', () => {
     expect(RepoList.displayName).toBe('RepoList');
-  });
-
-  it('should not dispatch searchRepos on first render', () => {
-    const store = mockStore(initialState);
-    store.dispatch = jest.fn();
-    const wrapper = mountWithStore(<RepoList />, store);
-
-    expect(store.dispatch).not.toHaveBeenCalled();
   });
 
   it('should render list of repos', () => {
