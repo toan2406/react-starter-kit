@@ -46,7 +46,7 @@ describe('RepoList component', () => {
     const listItems = wrapper.find('li');
 
     expect(listItems).toHaveLength(3);
-    expect(listItems.first().text()).toBe('react');
+    expect(listItems.first().text()).toContain('react');
   });
 
   it('should dispatch a push action when an item is clicked', () => {

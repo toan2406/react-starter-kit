@@ -9,7 +9,6 @@ import branch from 'recompose/branch';
 import renderNothing from 'recompose/renderNothing';
 import { getRepo } from './actions';
 import { getSelectedRepo } from './selectors';
-import Common from '../../components/Common';
 
 type Repo = {
   name: string,
@@ -23,7 +22,6 @@ const RepoDetails = ({ selectedRepo }: Props) =>
   !selectedRepo ? null : (
     <div>
       <h2>{selectedRepo.name}</h2>
-      <Common />
       <p>Star: {selectedRepo.stargazers_count}</p>
     </div>
   );

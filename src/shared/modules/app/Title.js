@@ -1,9 +1,10 @@
 import React from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import styles from './title.scss';
 
 const Title = () => (
-  <h1>
-    <FormattedMessage id="greeting" values={{ name: 'Toan' }} />
+  <h1 className={styles.title}>
+    <FormattedMessage id="title" />
   </h1>
 );
 

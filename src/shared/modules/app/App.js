@@ -45,7 +45,7 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
-  setDefaultLocale('vi'),
+  setDefaultLocale('en'),
   dirtyConnect(null, mapDispatchToProps),
   lifecycle({
     componentDidMount() {

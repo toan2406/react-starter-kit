@@ -8,7 +8,8 @@ import { getSearchKeyword } from './selectors';
 
 const SearchInput = ({ value, onChange }) => (
   <form>
-    <input type="text" value={value} onChange={onChange} />
+    <label htmlFor="keyword">Search</label>{' '}
+    <input id="keyword" type="text" value={value} onChange={onChange} />
   </form>
 );
 

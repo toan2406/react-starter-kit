@@ -13,7 +13,8 @@ import { getRepos, getSearchKeyword } from './selectors';
 type Repo = {
   id: string,
   name: string,
-  owner: { login: string }
+  owner: { login: string },
+  stargazers_count: number
 };
 type Props = {|
   repos: Array<Repo>,
@@ -21,22 +22,19 @@ type Props = {|
 |};
 
 const RepoList = ({ repos, onItemClick }: Props) => (
-  <div>
-    <h2>Top 10 Repos</h2>
-    <ul>
-      {repos.map(({ id, name, owner }) => (
-        <li
-          key={id}
-          onClick={onItemClick.bind(null, {
-            owner: owner.login,
-            repo: name
-          })}
-        >
-          {name}
-        </li>
-      ))}
-    </ul>
-  </div>
+  <ul>
+    {repos.map(({ id, name, owner, stargazers_count }) => (
+      <li
+        key={id}
+        onClick={onItemClick.bind(null, {
+          owner: owner.login,
+          repo: name
+        })}
+      >
+        {name} ⭐ {stargazers_count}
+      </li>
+    ))}
+  </ul>
 );
 
 const mapStateToProps = (state, ownProps) => ({
