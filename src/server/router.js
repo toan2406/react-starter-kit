@@ -2,6 +2,7 @@ import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
+import { IntlProvider } from '../shared/modules/intl';
 import { ConnectedRouter, push } from 'react-router-redux';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import createHistory from 'history/createMemoryHistory';
@@ -23,9 +24,11 @@ router.use((req, res, next) => {
     .then(data => {
       const html = renderToString(
         <Provider store={store}>
-          <ConnectedRouter history={history}>
-            {renderRoutes(routes)}
-          </ConnectedRouter>
+          <IntlProvider>
+            <ConnectedRouter history={history}>
+              {renderRoutes(routes)}
+            </ConnectedRouter>
+          </IntlProvider>
         </Provider>
       );
 
