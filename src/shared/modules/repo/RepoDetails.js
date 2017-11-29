@@ -9,7 +9,6 @@ import branch from 'recompose/branch';
 import renderNothing from 'recompose/renderNothing';
 import { getRepo } from './actions';
 import { getSelectedRepo } from './selectors';
-import { getFirstRender } from '../app/selectors';
 import Common from '../../components/Common';
 
 type Repo = {
@@ -30,8 +29,7 @@ const RepoDetails = ({ selectedRepo }: Props) =>
   );
 
 const mapStateToProps = (state, ownProps) => ({
-  selectedRepo: getSelectedRepo(state),
-  firstRender: getFirstRender(state)
+  selectedRepo: getSelectedRepo(state)
 });
 
 const mapDispatchToProps = {
@@ -44,10 +42,8 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      const { firstRender, getRepo, match } = this.props;
-      if (!firstRender) {
-        getRepo(match.params);
-      }
+      const { getRepo, match } = this.props;
+      getRepo(match.params);
     }
   }),
   branch(props => !props.selectedRepo, renderNothing)

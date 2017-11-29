@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import dirtyConnect from '../../hocs/dirtyConnect';
 import compose from 'recompose/compose';
 import lifecycle from 'recompose/lifecycle';
 import setDefaultLocale from '../../hocs/setDefaultLocale';
@@ -46,7 +46,7 @@ const mapDispatchToProps = {
 
 const enhance = compose(
   setDefaultLocale('vi'),
-  connect(null, mapDispatchToProps),
+  dirtyConnect(null, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
       this.props.setFirstRender(false);
