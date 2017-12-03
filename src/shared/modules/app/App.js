@@ -2,6 +2,7 @@ import React from 'react';
 import dirtyConnect from '../../hocs/dirtyConnect';
 import compose from 'recompose/compose';
 import lifecycle from 'recompose/lifecycle';
+import setDisplayName from 'recompose/setDisplayName';
 import setDefaultLocale from '../../hocs/setDefaultLocale';
 
 import { TransitionGroup } from 'react-transition-group';
@@ -45,6 +46,7 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
+  setDisplayName('App'),
   setDefaultLocale('en'),
   dirtyConnect(null, mapDispatchToProps),
   lifecycle({

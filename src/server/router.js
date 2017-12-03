@@ -3,7 +3,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { IntlProvider } from '../shared/modules/intl';
-import { ConnectedRouter, push } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
 import { matchRoutes, renderRoutes } from 'react-router-config';
 import createHistory from 'history/createMemoryHistory';
 import configureStore from '../shared/configureStore';
@@ -14,11 +14,9 @@ import extractSplitPoints from './helpers/extractSplitPoints';
 const router = express.Router();
 
 router.use((req, res, next) => {
-  const history = createHistory();
+  const history = createHistory({ initialEntries: [req.originalUrl] });
   const store = configureStore(history);
-  const currentRoute = matchRoutes(routes, req.originalUrl);
-
-  store.dispatch(push(req.originalUrl));
+  const currentRoute = matchRoutes(routes, history.location.pathname);
 
   fetchComponentData(store.dispatch, currentRoute)
     .then(data => {

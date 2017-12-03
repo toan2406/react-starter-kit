@@ -2,6 +2,8 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const precacheConfig = require('./precache.config');
 
 module.exports = {
   entry: {
@@ -62,6 +64,7 @@ module.exports = {
     }),
     new ExtractTextPlugin({
       filename: '[name].css'
-    })
+    }),
+    new SWPrecacheWebpackPlugin(precacheConfig)
   ]
 };
