@@ -6,7 +6,7 @@ const mockStore = configureMockStore();
 
 const populatedState = {
   app: {
-    firstRender: false
+    isInit: false
   },
   repo: {
     ownerEntities: {

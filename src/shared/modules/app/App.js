@@ -12,7 +12,7 @@ import Title from './Title';
 import Nav from './Nav';
 import LanguageSelect from './LanguageSelect';
 
-import { setFirstRender } from './actions';
+import { initialize } from './actions';
 import { addLocaleData } from 'react-intl';
 import vi from 'react-intl/locale-data/vi';
 import styles from './app.scss';
@@ -42,7 +42,7 @@ const App = ({ route, location }) => {
 };
 
 const mapDispatchToProps = {
-  setFirstRender
+  initialize
 };
 
 const enhance = compose(
@@ -51,7 +51,7 @@ const enhance = compose(
   dirtyConnect(null, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      this.props.setFirstRender(false);
+      this.props.initialize();
     }
   })
 );

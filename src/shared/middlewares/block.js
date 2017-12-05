@@ -1,13 +1,13 @@
-import { setFirstRender } from '../modules/app/actions';
+import { initialize } from '../modules/app/actions';
 
 export default function blockMiddleware(store) {
   return next => action => {
     const { type } = action;
-    const setFirstRenderType = setFirstRender.toString();
+    const initializeType = initialize.toString();
     const currentState = store.getState();
-    const firstRender = currentState.app.firstRender;
+    const isInit = currentState.app.isInit;
 
-    if (!firstRender || type === setFirstRenderType) {
+    if (isInit || type === initializeType) {
       return next(action);
     }
   };

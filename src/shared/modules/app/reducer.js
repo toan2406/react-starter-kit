@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions';
-import { setFirstRender } from './actions';
+import { initialize } from './actions';
 
 const INITIAL_STATE = {
-  firstRender: true
+  isInit: false
 };
 
 export default handleActions({
-  [setFirstRender]: (state, { payload }) => ({
-    firstRender: !!payload
+  [initialize]: () => ({
+    isInit: true
   })
 }, INITIAL_STATE);

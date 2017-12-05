@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
 
-const setFirstRender = createAction('SET_FIRST_RENDER');
+const initialize = createAction('INITIALIZE');
 
-export { setFirstRender };
+export { initialize };
