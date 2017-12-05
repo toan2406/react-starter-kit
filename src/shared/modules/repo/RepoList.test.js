@@ -65,4 +65,10 @@ describe('RepoList component', () => {
       }
     });
   });
+
+  it('should show message if error occurs', () => {
+    const store = mockStore({});
+    const wrapper = mountWithStore(<RepoList />, store);
+    expect(wrapper.find('.error').exists()).toBeTruthy();
+  });
 });

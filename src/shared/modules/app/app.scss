@@ -30,4 +30,10 @@
     opacity: 0;
     transition: opacity 250ms ease-in;
   }
+
+  .error {
+    padding: 0.2em 0.5em;
+    color: white;
+    background: red;
+  }
 }

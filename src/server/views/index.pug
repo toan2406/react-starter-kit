@@ -1,4 +1,10 @@
 extends layout
 
 block content
+  script.
+    window.__INITIAL_STATE__ = !{initialState}
+    window.__SPLIT_POINTS__ = !{splitPoints}
+
   #react-root!= html
+
+  script(src='/app.bundle.js')

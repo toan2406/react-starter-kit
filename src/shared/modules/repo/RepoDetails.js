@@ -7,6 +7,7 @@ import setStatic from 'recompose/setStatic';
 import setDisplayName from 'recompose/setDisplayName';
 import branch from 'recompose/branch';
 import renderNothing from 'recompose/renderNothing';
+import handleError from '../../hocs/handleError';
 import { getRepo } from './actions';
 import { getSelectedRepo } from './selectors';
 
@@ -37,6 +38,7 @@ const mapDispatchToProps = {
 const enhance = compose(
   setDisplayName('RepoDetails'),
   setStatic('needs', [getRepo]),
+  handleError(),
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {

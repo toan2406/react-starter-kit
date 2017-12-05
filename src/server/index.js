@@ -6,6 +6,7 @@ import { viewDir, publicDir, faviconPath } from './config';
 import router from './router';
 
 const port = process.env.PORT;
+const nodeEnv = process.env.NODE_ENV;
 const app = express();
 
 app.set('views', viewDir);
@@ -21,7 +22,11 @@ app.use(errorHandler);
 app.listen(port, onListen);
 
 function errorHandler(err, req, res, next) {
-  res.status(500).send(err.message);
+  const error = {
+    message: err.message,
+    stack: nodeEnv === 'development' ? err.stack : null
+  };
+  res.status(500).render('error', { error });
 }
 
 function onListen() {
