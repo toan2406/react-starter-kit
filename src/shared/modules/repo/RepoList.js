@@ -5,7 +5,6 @@ import compose from 'recompose/compose';
 import lifecycle from 'recompose/lifecycle';
 import withHandlers from 'recompose/withHandlers';
 import setStatic from 'recompose/setStatic';
-import setDisplayName from 'recompose/setDisplayName';
 import handleError from '../../hocs/handleError';
 import { push } from 'react-router-redux';
 import { searchRepos } from './actions';
@@ -49,7 +48,6 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
-  setDisplayName('RepoList'),
   setStatic('needs', [searchRepos]),
   handleError(),
   connect(mapStateToProps, mapDispatchToProps),

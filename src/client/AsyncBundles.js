@@ -3,7 +3,7 @@ import asyncComponent from '../shared/hocs/asyncComponent';
 export const Home = asyncComponent(() =>
   require.ensure(
     [],
-    require => require('../shared/modules/home/Home'),
+    require => require('../shared/modules/pages/Home'),
     'Home'
   )
 );
@@ -11,15 +11,23 @@ export const Home = asyncComponent(() =>
 export const RepoDetails = asyncComponent(() =>
   require.ensure(
     [],
-    require => require('../shared/modules/repo/RepoDetails'),
+    require => require('../shared/modules/pages/RepoDetails'),
     'RepoDetails'
+  )
+);
+
+export const Login = asyncComponent(() =>
+  require.ensure(
+    [],
+    require => require('../shared/modules/pages/Login'),
+    'Login'
   )
 );
 
 export const About = asyncComponent(() =>
   require.ensure(
     [],
-    require => require('../shared/modules/about/About'),
+    require => require('../shared/modules/pages/About'),
     'About'
   )
 );

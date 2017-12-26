@@ -9,7 +9,7 @@ import configureStore from '../shared/configureStore';
 import * as Bundles from './AsyncBundles';
 import routes from './routes';
 
-import './serviceWorkerRegistration';
+// import './serviceWorkerRegistration';
 
 const history = createHistory();
 const store = configureStore(history, window.__INITIAL_STATE__);

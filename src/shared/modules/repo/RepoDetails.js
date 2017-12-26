@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import compose from 'recompose/compose';
 import lifecycle from 'recompose/lifecycle';
 import setStatic from 'recompose/setStatic';
-import setDisplayName from 'recompose/setDisplayName';
 import branch from 'recompose/branch';
 import renderNothing from 'recompose/renderNothing';
 import handleError from '../../hocs/handleError';
@@ -16,16 +16,15 @@ type Repo = {
   stargazers_count: number
 };
 type Props = {|
-  selectedRepo?: Repo
+  selectedRepo: Repo
 |};
 
-const RepoDetails = ({ selectedRepo }: Props) =>
-  !selectedRepo ? null : (
-    <div>
-      <h2>{selectedRepo.name}</h2>
-      <p>Star: {selectedRepo.stargazers_count}</p>
-    </div>
-  );
+const RepoDetails = ({ selectedRepo }: Props) => (
+  <div>
+    <h2>{selectedRepo.name}</h2>
+    <p>Star: {selectedRepo.stargazers_count}</p>
+  </div>
+);
 
 const mapStateToProps = (state, ownProps) => ({
   selectedRepo: getSelectedRepo(state)
@@ -36,7 +35,7 @@ const mapDispatchToProps = {
 };
 
 const enhance = compose(
-  setDisplayName('RepoDetails'),
+  withRouter,
   setStatic('needs', [getRepo]),
   handleError(),
   connect(mapStateToProps, mapDispatchToProps),

@@ -36,10 +36,6 @@ const populatedState = {
 };
 
 describe('RepoList component', () => {
-  it('has correct display name', () => {
-    expect(RepoList.displayName).toBe('RepoList');
-  });
-
   it('should render list of repos', () => {
     const store = mockStore(populatedState);
     const wrapper = mountWithStore(<RepoList />, store);

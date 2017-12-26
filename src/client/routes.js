@@ -1,7 +1,7 @@
 import App from '../shared/modules/app/App';
 import AppShell from '../shared/modules/app/AppShell';
 import NotFound from '../shared/components/NotFound';
-import { Home, RepoDetails, About } from './AsyncBundles';
+import { Home, RepoDetails, Login, About } from './AsyncBundles';
 
 const routes = [
   {
@@ -16,6 +16,11 @@ const routes = [
         path: '/shell',
         exact: true,
         component: AppShell
+      },
+      {
+        path: '/login',
+        exact: true,
+        component: Login
       },
       {
         path: '/about',

@@ -25,14 +25,13 @@ const populatedState = {
 };
 
 describe('RepoDetails component', () => {
-  it('has correct display name', () => {
-    expect(RepoDetails.displayName).toBe('RepoDetails');
-  });
-
   it('should show repo details', () => {
     const store = mockStore(populatedState);
     const match = { params: { owner: 'vuejs', repo: 'vue' } };
-    const wrapper = mountWithStore(<RepoDetails match={match} />, store);
+    const wrapper = mountWithStore(
+      <RepoDetails.WrappedComponent match={match} />,
+      store
+    );
 
     expect(wrapper.find('h2').first().text()).toBe('vue');
   });
